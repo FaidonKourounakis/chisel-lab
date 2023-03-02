@@ -1,0 +1,4 @@
+[warn] C:\Users\faido\Documents\My Documents\ECE\Semester 6\Digital Electronics 2\chisel-lab\lab4\src\main\scala\heap\Fetcher.scala:47:60: method zipped in class Ops is deprecated (since 2.13.0): Use xs.lazyZip(ys).lazyZip(zs)
+[warn]   io.res.children := (childrenReg, childIndexReg, maskReg).zipped.map { case (item, index, valid) =>
+[warn]                                                            ^
+[warn] one warning found

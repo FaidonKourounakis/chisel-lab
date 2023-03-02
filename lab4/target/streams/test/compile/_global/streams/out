@@ -1,0 +1,4 @@
+[error] C:\Users\faido\Documents\My Documents\ECE\Semester 6\Digital Electronics 2\chisel-lab\lab4\src\test\scala\HeapTest.scala:94:14: value operation is not a member of Heap.Request
+[error]       dut.io.operation(Operation.RemoveRoot)
+[error]              ^
+[error] one error found

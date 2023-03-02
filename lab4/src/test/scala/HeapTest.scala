@@ -36,25 +36,82 @@ class HeapTest extends AnyFlatSpec with ChiselScalatestTester {
 
   it should "assert empty after all numbers have been removed" in {
     test(new TestHeap) { dut =>
-      // write your test code here
+      // fill with numbers 1-8
+      val a = Range.inclusive(1, 8)
+      dut.io.op.poke(Operation.Insert)
+      for (n <- a) {
+        dut.io.valid.poke(true)
+        dut.io.newValue.poke(n)
+        dut.clock.step()
+        dut.io.valid.poke(false)
+        while (!dut.io.ready.peekBoolean()) dut.clock.step()
+      }
+      // empty it
+      dut.io.op.poke(Operation.RemoveRoot)
+      for (n <- a) {
+        dut.io.empty.expect(false)
+        dut.io.valid.poke(true)
+        dut.clock.step()
+        dut.io.valid.poke(false)
+        while (!dut.io.ready.peekBoolean()) dut.clock.step()
+      }
+      dut.io.empty.expect(true)
     }
   }
 
   it should "assert full when 8 numbers have been inserted" in {
     test(new TestHeap) { dut =>
-      // write your test code here
+      // fill with numbers 1-8
+      val a = Range.inclusive(1, 8)
+      dut.io.op.poke(Operation.Insert)
+      for (n <- a) {
+        dut.io.valid.poke(true)
+        dut.io.newValue.poke(n)
+        dut.clock.step()
+        dut.io.valid.poke(false)
+        while (!dut.io.ready.peekBoolean()) dut.clock.step()
+      }
+      dut.io.full.expect(true)
+      
+      // wait for the dut to get ready again
     }
   }
 
   it should "deassert full after one number is removed when it was full" in {
     test(new TestHeap) { dut =>
-      // write your test code here
+      // fill it up
+      val a = Range.inclusive(1, 8)
+      dut.io.op.poke(Operation.Insert)
+      for (n <- a) {
+        dut.io.valid.poke(true)
+        dut.io.newValue.poke(n)
+        dut.clock.step()
+        dut.io.valid.poke(false)
+        while (!dut.io.ready.peekBoolean()) dut.clock.step()
+      }
+      // remove one and check
+      dut.io.valid.poke(true)
+      dut.io.op.poke(Operation.RemoveRoot)
+      dut.clock.step()
+      dut.io.valid.poke(true)
+      while (!dut.io.ready.peekBoolean()) dut.clock.step()
+      dut.io.full.expect(false)
     }
   }
 
   it should "not change the sequence if new insertions are issued when it is full" in {
     test(new TestHeap) { dut =>
-      // write your test code here
+      // fill it up
+      val a = Range.inclusive(1, 9)
+      dut.io.op.poke(Operation.Insert)
+      for (n <- a) {
+        dut.io.valid.poke(true)
+        dut.io.newValue.poke(n)
+        dut.clock.step()
+        dut.io.valid.poke(false)
+        while (!dut.io.ready.peekBoolean()) dut.clock.step()
+      }
+      dut.io.root.expect(8) //not 9
     }
   }
 

@@ -1,0 +1,8 @@
+[debug] Created transactional ClassFileManager with tempDir = C:\Users\faido\Documents\My Documents\ECE\Semester 6\Digital Electronics 2\chisel-lab\lab4\target\scala-2.13\test-classes.bak
+[debug] About to delete class files:
+[debug] 	HeapTest.class
+[debug] We backup class files:
+[debug] 	HeapTest.class
+[debug] Registering generated classes:
+[debug] 	HeapTest.class
+[debug] Removing the temporary directory used for backing up class files: C:\Users\faido\Documents\My Documents\ECE\Semester 6\Digital Electronics 2\chisel-lab\lab4\target\scala-2.13\test-classes.bak
